@@ -19,9 +19,10 @@ namespace database
     /// </summary>
     public partial class NewComicsWindow : Window
     {
-        public NewComicsWindow()
+        public NewComicsWindow(List <Publisher> publishers)
         {
             InitializeComponent();
+            comboBoxPublisher.ItemsSource = publishers;
         }
         Comics _newComics;
         public Comics NewComics

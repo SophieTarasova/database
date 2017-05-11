@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace database
 {
+    [Serializable]
     public class Publisher
     {
         private string _name;

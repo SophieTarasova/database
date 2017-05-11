@@ -24,7 +24,20 @@ namespace database
         {
             InitializeComponent();
             listBoxComics.ItemsSource = null;
-            listBoxComics.ItemsSource = ((SearchWindow)Application.Current.MainWindow).SearchComics;
+            var window = new SearchWindow();
+            if (window.ShowDialog().Value)
+            {
+                listBoxComics.ItemsSource = null;
+                listBoxComics.ItemsSource = window.SearchComics;
+
+            }
+        }
+
+        private void buttonBack_Click(object sender, RoutedEventArgs e)
+        {
+            listBoxComics.ItemsSource = null;
+            MainPage p = new MainPage();
+            NavigationService.Navigate(p);
         }
     }
 }

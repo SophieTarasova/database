@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace database
 {
@@ -25,7 +26,9 @@ namespace database
         public MainPage()
         {
             InitializeComponent();
+            listBoxComics.ItemsSource = null;
             LoadData();
+            Deserialization();
         }
         private void RefreshListBox()
         {
@@ -34,11 +37,12 @@ namespace database
         }
         private void buttonAdd_Click(object sender, RoutedEventArgs e)
         {
-            var window = new NewComicsWindow();
+            var window = new NewComicsWindow(((MainWindow)Application.Current.MainWindow)._publishers);
             if (window.ShowDialog().Value)
             {
                 ((MainWindow)Application.Current.MainWindow)._comics.Add(window.NewComics);
                 SaveData();
+                Serialization();
                 RefreshListBox();
             }
 
@@ -49,6 +53,7 @@ namespace database
             if (listBoxComics.SelectedIndex != -1)
             {
                 ((MainWindow)Application.Current.MainWindow)._comics.RemoveAt(listBoxComics.SelectedIndex);
+                Serialization();
                 SaveData();
                 RefreshListBox();
             }
@@ -74,8 +79,6 @@ namespace database
         {
             try
             {
-                // _comics = new List<Comics>();
-                //_publishers = new List<Publisher>();
 
                 using (var sr = new StreamReader(FileName))
                 {
@@ -91,10 +94,9 @@ namespace database
                                 i++;
                             Publisher p;
                             if (i < ((MainWindow)Application.Current.MainWindow)._publishers.Count)
-                                p = ((MainWindow)Application.Current.MainWindow)._publishers[i];  // Use existing faculty
+                                p = ((MainWindow)Application.Current.MainWindow)._publishers[i];  
                             else
                             {
-                                // Create a new faculty and add it to the list
                                 p = new Publisher(parts[1], parts[2]);
                                 ((MainWindow)Application.Current.MainWindow)._publishers.Add(p);
                             }
@@ -110,8 +112,6 @@ namespace database
             }
             catch (FileNotFoundException)
             {
-                // Файла с данными нет, создаем один факультет по умолчанию, чтобы можно было
-                // выбирать его при добавлении преподавателей
                 ((MainWindow)Application.Current.MainWindow)._publishers.Add(new Publisher("DC", "www.dccomics.com"));
             }
             catch
@@ -121,16 +121,45 @@ namespace database
             RefreshListBox();
         }
 
+        private void Serialization()
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+
+            using (FileStream fs = new FileStream("comics.dat", FileMode.OpenOrCreate))
+            {
+                
+                formatter.Serialize(fs, ((MainWindow)Application.Current.MainWindow)._comics);
+
+                
+            }
+
+
+        }
+
+        private void Deserialization()
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            using (FileStream fs = new FileStream("comics.dat", FileMode.OpenOrCreate))
+            {
+                List<Comics> deserilizeComics = (List<Comics>)formatter.Deserialize(fs);
+
+                listBoxComics.ItemsSource = deserilizeComics;
+            }
+        }
+
+
         private void buttonSearch_Click(object sender, RoutedEventArgs e)
         {
-            var window = new SearchWindow();
-            if (window.ShowDialog().Value)
-            {
-                listBoxComics.ItemsSource = null;
-                listBoxComics.ItemsSource = window.SearchComics;
-                //SearchPage p = new SearchPage();
-                //NavigationService.Navigate(p);
-            }
+
+            SearchPage p = new SearchPage();
+        NavigationService.Navigate(p);
+
+
+        }
+
+        private void buttonUpdate_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

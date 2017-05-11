@@ -10,6 +10,7 @@
 
     <Grid Margin="0,0,-142,0">
         <ListBox x:Name="listBoxComics" DisplayMemberPath="Info" HorizontalAlignment="Left" Height="189" Margin="84,22,0,0" VerticalAlignment="Top" Width="280"/>
+        <Button x:Name="buttonBack" Content="Back" HorizontalAlignment="Left" Margin="332,262,0,0" VerticalAlignment="Top" Width="75" Click="buttonBack_Click"/>
 
     </Grid>
 </Page>
