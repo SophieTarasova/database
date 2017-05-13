@@ -38,6 +38,14 @@ namespace database
             Serialization();
             SaveData();
         }
+        public MainPage(Comics NewComics)
+        {
+            InitializeComponent();
+            ((MainWindow)Application.Current.MainWindow)._comics.Add(NewComics);
+            SaveData();
+            Serialization();
+            RefreshListBox();
+        }
         private void RefreshListBox()
         {
             listBoxComics.ItemsSource = null;
@@ -45,14 +53,8 @@ namespace database
         }
         private void buttonAdd_Click(object sender, RoutedEventArgs e)
         {
-            var window = new NewComicsWindow(((MainWindow)Application.Current.MainWindow)._publishers);
-            if (window.ShowDialog().Value)
-            {
-                ((MainWindow)Application.Current.MainWindow)._comics.Add(window.NewComics);
-                SaveData();
-                Serialization();
-                RefreshListBox();
-            }
+           NewComicsPage p = new NewComicsPage(((MainWindow)Application.Current.MainWindow)._publishers);
+            NavigationService.Navigate(p);
 
         }
 

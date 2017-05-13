@@ -5,12 +5,22 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:database"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="300" d:DesignWidth="402.208"
       Title="SearchPage">
 
     <Grid Margin="0,0,-142,0">
-        <ListBox x:Name="listBoxComics" DisplayMemberPath="Info" HorizontalAlignment="Left" Height="189" Margin="84,22,0,0" VerticalAlignment="Top" Width="280"/>
-        <Button x:Name="buttonBack" Content="Back" HorizontalAlignment="Left" Margin="332,262,0,0" VerticalAlignment="Top" Width="75" Click="buttonBack_Click"/>
+        <Button x:Name="buttonSearch" Content="Поиск" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+                Width="90" Height="25" Margin="132,0,322.4,43" Click="buttonSearch_Click"/>
+        <ComboBox SelectedIndex="0" Name="comboxSearch" Margin="10,10,184.4,259">
+            <ComboBoxItem Content="Поиск..." Name="Search"></ComboBoxItem>
+            <ComboBoxItem Content="По издательству" Name="Publisher"></ComboBoxItem>
+            <ComboBoxItem Content="По названию" Name="Name"></ComboBoxItem>
+            <ComboBoxItem Content="По году" Name="Year"></ComboBoxItem>
+            <ComboBoxItem Content="По автору" Name="Author"></ComboBoxItem>
+        </ComboBox>
+        <TextBox x:Name="textBoxSearch" HorizontalAlignment="Left" Height="27" Margin="10,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="341"/>
+        <ListBox x:Name="listBoxComics" DisplayMemberPath="Info" HorizontalAlignment="Left" Height="111" Margin="10,106,0,0" VerticalAlignment="Top" Width="341"/>
+        <Button x:Name="buttonBack" Content="Back" HorizontalAlignment="Left" Margin="276,270,0,0" VerticalAlignment="Top" Width="75" Click="buttonBack_Click"/>
 
     </Grid>
 </Page>

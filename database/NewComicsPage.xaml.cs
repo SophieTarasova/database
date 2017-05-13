@@ -10,20 +10,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace database
 {
     /// <summary>
-    /// Логика взаимодействия для NewComicsWindow.xaml
+    /// Логика взаимодействия для NewComicsPage.xaml
     /// </summary>
-    public partial class NewComicsWindow : Window
+    public partial class NewComicsPage : Page
     {
-        public NewComicsWindow(List <Publisher> publishers)
+        public NewComicsPage(List<Publisher> publishers)
         {
             InitializeComponent();
             comboBoxPublisher.ItemsSource = publishers;
         }
+
         Comics _newComics;
         public Comics NewComics
         {
@@ -32,8 +34,7 @@ namespace database
                 return _newComics;
             }
         }
-
-        private void buttonAdd_Click(object sender, RoutedEventArgs e)
+        private void Add(object sender, RoutedEventArgs e)
         {
             int year;
             if (string.IsNullOrWhiteSpace(textBoxName.Text))
@@ -63,8 +64,9 @@ namespace database
 
 
             _newComics = new Comics(textBoxName.Text, textBoxAuthor.Text, year);
-            _newComics.Publisher= comboBoxPublisher.SelectedItem as Publisher;
-            DialogResult = true;
+            _newComics.Publisher = comboBoxPublisher.SelectedItem as Publisher;
+            MainPage p = new MainPage(NewComics);
+            NavigationService.Navigate(p);
         }
     }
 }
