@@ -33,13 +33,24 @@ namespace database
             string h = Convert.ToBase64String(hash);
                 byte[] password = md5.ComputeHash(Encoding.ASCII.GetBytes("comics"));
               string pass =  Convert.ToBase64String(password);
-                if ((textBoxLogin.Text == "sonjechka") && (h==pass))
-                {
-            MainPage p = new MainPage();
+            if ((textBoxLogin.Text == "sonjechka") && (h == pass))
+            {
+                Logger.Instance.Log("Выполнен авторизованный вход");
+                MainPage p = new MainPage();
                 NavigationService.Navigate(p);
-           }
+
+            }
             else
-               MessageBox.Show("Вы ввели неправильный логин/пароль");
+            { Logger.Instance.Log("Была произведена попытка войти с неверным паролем/логином");
+                MessageBox.Show("Вы ввели неправильный логин/пароль"); }
+        }
+
+        private void buttonNonAuthorized_Click(object sender, RoutedEventArgs e)
+        {
+            string s = null;
+            Logger.Instance.Log("Выполнен неавторизованный вход");
+            MainPage p = new MainPage(s);
+            NavigationService.Navigate(p);
         }
     }
 }

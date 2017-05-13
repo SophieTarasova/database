@@ -41,23 +41,27 @@ namespace database
             {
                 MessageBox.Show("Необходимо ввести название");
                 textBoxName.Focus();
+                Logger.Instance.Log("Ошибка добавления комикса");
                 return;
             }
             if (string.IsNullOrWhiteSpace(textBoxAuthor.Text))
             {
                 MessageBox.Show("Необходимо ввести имя автора");
+                Logger.Instance.Log("Ошибка добавления комикса");
                 textBoxAuthor.Focus();
                 return;
             }
             if (!int.TryParse(textBoxYear.Text, out year))
             {
                 MessageBox.Show("Необходимо ввести год");
+                Logger.Instance.Log("Ошибка добавления комикса");
                 textBoxYear.Focus();
                 return;
             }
             if (comboBoxPublisher.SelectedItem == null)
             {
                 MessageBox.Show("Необходимо выбрать издательство");
+                Logger.Instance.Log("Ошибка добавления комикса");
                 comboBoxPublisher.Focus();
                 return;
             }
@@ -65,6 +69,7 @@ namespace database
 
             _newComics = new Comics(textBoxName.Text, textBoxAuthor.Text, year);
             _newComics.Publisher = comboBoxPublisher.SelectedItem as Publisher;
+            Logger.Instance.Log("Добавлен новый комикс");
             MainPage p = new MainPage(NewComics);
             NavigationService.Navigate(p);
         }

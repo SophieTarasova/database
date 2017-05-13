@@ -30,6 +30,17 @@ namespace database
             LoadData();
           Deserialization();
         }
+
+        public MainPage(string s)
+        {
+            InitializeComponent();
+            listBoxComics.ItemsSource = null;
+            LoadData();
+            Deserialization();
+            buttonAdd.Visibility = Visibility.Hidden;
+            buttonDelete.Visibility = Visibility.Hidden;
+            buttonUpdate.Visibility = Visibility.Hidden;
+        }
         public MainPage(Comics _updatedComics, int index)
         {
             InitializeComponent();
@@ -63,6 +74,7 @@ namespace database
             if (listBoxComics.SelectedIndex != -1)
             {
                 ((MainWindow)Application.Current.MainWindow)._comics.RemoveAt(listBoxComics.SelectedIndex);
+                Logger.Instance.Log("Было произведено удаление комикса");
                 Serialization();
                 SaveData();
                 RefreshListBox();
@@ -180,6 +192,13 @@ namespace database
 
 
 
+        }
+
+        private void buttonExit_Click(object sender, RoutedEventArgs e)
+        {
+            Logger.Instance.Log("Был произведен выход на страницу авторизации");
+            LoginPage p = new LoginPage();
+            NavigationService.Navigate(p);
         }
     }
 }

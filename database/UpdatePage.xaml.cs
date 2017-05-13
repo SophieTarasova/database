@@ -45,29 +45,34 @@ namespace database
             if (string.IsNullOrWhiteSpace(textBoxName.Text))
             {
                 MessageBox.Show("Необходимо ввести название");
+                Logger.Instance.Log("Ошибка редактирования комикса");
                 textBoxName.Focus();
                 return;
             }
             if (string.IsNullOrWhiteSpace(textBoxAuthor.Text))
             {
                 MessageBox.Show("Необходимо ввести имя автора");
+                Logger.Instance.Log("Ошибка редактирования комикса");
                 textBoxAuthor.Focus();
                 return;
             }
             if (string.IsNullOrWhiteSpace((textBoxYear.Text).ToString()))
             {
                 MessageBox.Show("Необходимо ввести год");
+                Logger.Instance.Log("Ошибка редактирования комикса");
                 textBoxYear.Focus();
                 return;
             }
             if (comboBoxPublisher.SelectedItem == null)
             {
                 MessageBox.Show("Необходимо выбрать издательство");
+                Logger.Instance.Log("Ошибка редактирования комикса");
                 comboBoxPublisher.Focus();
                 return;
             }
             _newComics = new Comics(textBoxName.Text, textBoxAuthor.Text, int.Parse(textBoxYear.Text));
             _newComics.Publisher = comboBoxPublisher.SelectedItem as Publisher;
+            Logger.Instance.Log("Было произведено редактирования комикса");
             MainPage p = new MainPage(NewComics, index);
             NavigationService.Navigate(p);
 
