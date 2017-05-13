@@ -28,7 +28,15 @@ namespace database
             InitializeComponent();
             listBoxComics.ItemsSource = null;
             LoadData();
-            Deserialization();
+          Deserialization();
+        }
+        public MainPage(Comics _updatedComics, int index)
+        {
+            InitializeComponent();
+            ((MainWindow)Application.Current.MainWindow)._comics[index] = _updatedComics;
+            RefreshListBox();
+            Serialization();
+            SaveData();
         }
         private void RefreshListBox()
         {
@@ -63,6 +71,7 @@ namespace database
         {
             // If selected index = -1, we set IsEnabled to false
             buttonDelete.IsEnabled = listBoxComics.SelectedIndex != -1;
+            buttonUpdate.IsEnabled= listBoxComics.SelectedIndex != -1;
         }
         private void SaveData()
         {
@@ -159,6 +168,15 @@ namespace database
 
         private void buttonUpdate_Click(object sender, RoutedEventArgs e)
         {
+            UpdatePage p = new UpdatePage(listBoxComics.SelectedItem as Comics, ((MainWindow)Application.Current.MainWindow)._publishers, listBoxComics.SelectedIndex);
+            if (listBoxComics.SelectedIndex !=-1)
+            {
+                NavigationService.Navigate(p); 
+
+            }
+            else MessageBox.Show("Вы не выбрали комикс для редактирования");
+
+
 
         }
     }
