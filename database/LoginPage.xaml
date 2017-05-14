@@ -7,12 +7,44 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="LoginPage">
+    <Page.Resources>
+        <Style x:Key="placeHolder" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}" >
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <TextBox Text="{Binding Path=Text, 
+RelativeSource={RelativeSource TemplatedParent}, 
+Mode=TwoWay, 
+UpdateSourceTrigger=PropertyChanged}" 
+x:Name="textSource" 
+Background="Transparent" 
+Panel.ZIndex="2" />
+                            <TextBox Text="{TemplateBinding Tag}" Background="{TemplateBinding Background}" Panel.ZIndex="1">
+                                <TextBox.Style>
+                                    <Style TargetType="{x:Type TextBox}">
+                                        <Setter Property="Foreground" Value="Transparent"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=Text, Source={x:Reference textSource}}" Value="">
+                                                <Setter Property="Foreground" Value="LightGray"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
 
     <Grid>
         <PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="77,157,0,0" VerticalAlignment="Top" Width="148" Height="21"/>
-        <TextBox x:Name="textBoxLogin" HorizontalAlignment="Left" Height="21" Margin="77,111,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="148"/>
+        <TextBox x:Name="textBoxLogin" Style="{StaticResource placeHolder}" Tag="login" HorizontalAlignment="Left" Height="21" Margin="77,111,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="148"/>
         <Button x:Name="buttonLogin" Content="log in" HorizontalAlignment="Left" Margin="113,211,0,0" VerticalAlignment="Top" Width="75" Click="buttonLogin_Click"/>
         <Button x:Name="buttonNonAuthorized" Content="Read-only mode" HorizontalAlignment="Left" Margin="215,271,0,0" VerticalAlignment="Top" Width="75" Click="buttonNonAuthorized_Click"/>
+        
 
     </Grid>
 </Page>

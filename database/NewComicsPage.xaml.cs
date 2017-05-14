@@ -24,6 +24,7 @@ namespace database
         {
             InitializeComponent();
             comboBoxPublisher.ItemsSource = publishers;
+            
         }
 
         Comics _newComics;

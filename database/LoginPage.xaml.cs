@@ -20,10 +20,13 @@ namespace database
     /// Логика взаимодействия для LoginPage.xaml
     /// </summary>
     public partial class LoginPage : Page
+
     {
+        
         public LoginPage()
         {
             InitializeComponent();
+            
         }
 
         private void buttonLogin_Click(object sender, RoutedEventArgs e)

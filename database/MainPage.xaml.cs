@@ -22,12 +22,14 @@ namespace database
     /// </summary>
     public partial class MainPage : Page
     {
-        const string FileName = "database.txt";
+        //const string FileName = "database.txt";
         public MainPage()
         {
             InitializeComponent();
+           
             listBoxComics.ItemsSource = null;
-            LoadData();
+            RefreshListBox();
+           // LoadData();
           Deserialization();
         }
 
@@ -35,36 +37,37 @@ namespace database
         {
             InitializeComponent();
             listBoxComics.ItemsSource = null;
-            LoadData();
+           // LoadData();
             Deserialization();
             buttonAdd.Visibility = Visibility.Hidden;
             buttonDelete.Visibility = Visibility.Hidden;
             buttonUpdate.Visibility = Visibility.Hidden;
+            buttonSearch.Visibility = Visibility.Hidden;
         }
         public MainPage(Comics _updatedComics, int index)
         {
             InitializeComponent();
-            ((MainWindow)Application.Current.MainWindow)._comics[index] = _updatedComics;
+           MainWindow._comics[index] = _updatedComics;
             RefreshListBox();
             Serialization();
-            SaveData();
+          //  SaveData();
         }
         public MainPage(Comics NewComics)
         {
             InitializeComponent();
-            ((MainWindow)Application.Current.MainWindow)._comics.Add(NewComics);
-            SaveData();
+            MainWindow._comics.Add(NewComics);
+         //   SaveData();
             Serialization();
             RefreshListBox();
         }
         private void RefreshListBox()
         {
             listBoxComics.ItemsSource = null;
-            listBoxComics.ItemsSource = ((MainWindow)Application.Current.MainWindow)._comics;
+            listBoxComics.ItemsSource = MainWindow._comics;
         }
         private void buttonAdd_Click(object sender, RoutedEventArgs e)
         {
-           NewComicsPage p = new NewComicsPage(((MainWindow)Application.Current.MainWindow)._publishers);
+           NewComicsPage p = new NewComicsPage(MainWindow._publishers);
             NavigationService.Navigate(p);
 
         }
@@ -73,21 +76,20 @@ namespace database
         {
             if (listBoxComics.SelectedIndex != -1)
             {
-                ((MainWindow)Application.Current.MainWindow)._comics.RemoveAt(listBoxComics.SelectedIndex);
+               MainWindow._comics.RemoveAt(listBoxComics.SelectedIndex);
                 Logger.Instance.Log("Было произведено удаление комикса");
                 Serialization();
-                SaveData();
+           //     SaveData();
                 RefreshListBox();
             }
         }
 
         private void listBoxComics_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // If selected index = -1, we set IsEnabled to false
             buttonDelete.IsEnabled = listBoxComics.SelectedIndex != -1;
             buttonUpdate.IsEnabled= listBoxComics.SelectedIndex != -1;
         }
-        private void SaveData()
+     /*   private void SaveData()
         {
             using (var sw = new StreamWriter(FileName))
             {
@@ -96,9 +98,9 @@ namespace database
                     sw.WriteLine($"{c.Name}:{c.Publisher.Name}:{c.Publisher.Site}:{c.Author}:{c.Year}");
                 }
             }
-        }
+        }*/
 
-       private void LoadData()
+   /*    private void LoadData()
         {
             try
             {
@@ -142,7 +144,7 @@ namespace database
                 MessageBox.Show("Ошибка чтения из файла");
             }
             RefreshListBox();
-        }
+        }*/
 
         private void Serialization()
         {
@@ -151,9 +153,8 @@ namespace database
             using (FileStream fs = new FileStream("comics.dat", FileMode.OpenOrCreate))
             {
                 
-                formatter.Serialize(fs, ((MainWindow)Application.Current.MainWindow)._comics);
+                formatter.Serialize(fs, MainWindow._comics);
 
-                
             }
 
 
@@ -162,11 +163,28 @@ namespace database
         private void Deserialization()
         {
             BinaryFormatter formatter = new BinaryFormatter();
-            using (FileStream fs = new FileStream("comics.dat", FileMode.OpenOrCreate))
+            try
             {
-                List<Comics> deserilizeComics = (List<Comics>)formatter.Deserialize(fs);
-
-                listBoxComics.ItemsSource = deserilizeComics;
+                using (FileStream fs = new FileStream("comics.dat", FileMode.OpenOrCreate))
+                {
+                    List<Comics> deserilizeComics = (List<Comics>)formatter.Deserialize(fs);
+                    foreach (var p in deserilizeComics)
+                    {
+                        MainWindow._comics.Add(p);
+                    }
+                    foreach (var p in MainWindow._comics)
+                    {
+                        MainWindow._publishers.Add(p.Publisher);
+                    }
+                    listBoxComics.ItemsSource = MainWindow._comics;
+                }
+            }
+            catch
+            {
+                MainWindow._publishers.Add(new Publisher("DC", "www.dccomics.com"));
+                MainWindow._publishers.Add(new Publisher("Parallel Comics", "www.parallelcomic.com"));
+                MainWindow._publishers.Add(new Publisher("MARVEL", "www.marvel.com"));
+                listBoxComics.ItemsSource = null;
             }
         }
 
@@ -174,7 +192,7 @@ namespace database
         private void buttonSearch_Click(object sender, RoutedEventArgs e)
         {
 
-            SearchPage p = new SearchPage();
+            SearchPage p = new SearchPage(MainWindow._publishers);
         NavigationService.Navigate(p);
 
 
@@ -182,7 +200,7 @@ namespace database
 
         private void buttonUpdate_Click(object sender, RoutedEventArgs e)
         {
-            UpdatePage p = new UpdatePage(listBoxComics.SelectedItem as Comics, ((MainWindow)Application.Current.MainWindow)._publishers, listBoxComics.SelectedIndex);
+            UpdatePage p = new UpdatePage(listBoxComics.SelectedItem as Comics, MainWindow._publishers, listBoxComics.SelectedIndex);
             if (listBoxComics.SelectedIndex !=-1)
             {
                 NavigationService.Navigate(p); 
@@ -196,6 +214,7 @@ namespace database
 
         private void buttonExit_Click(object sender, RoutedEventArgs e)
         {
+            MainWindow._comics.Clear();
             Logger.Instance.Log("Был произведен выход на страницу авторизации");
             LoginPage p = new LoginPage();
             NavigationService.Navigate(p);

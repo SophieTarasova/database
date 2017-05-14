@@ -20,68 +20,46 @@ namespace database
     /// </summary>
     public partial class SearchPage : Page
     {
-        public SearchPage()
+        public SearchPage(List<Publisher> publishers)
         {
             InitializeComponent();
+            comboBoxPublisher.ItemsSource = publishers;
             listBoxComics.ItemsSource = null;
-            _searchComics.Clear();
+           
 
-            
         }
 
-        public List<Comics> _searchComics = new List<Comics>();
-        public List<Comics> SearchComics
-        {
-            get
-            {
-                return _searchComics;
-            }
-        }
+        
 
         private void buttonBack_Click(object sender, RoutedEventArgs e)
         {
-            _searchComics.Clear();
             MainPage p = new MainPage();
             NavigationService.Navigate(p);
         }
 
         private void buttonSearch_Click(object sender, RoutedEventArgs e)
         {
-           
-            ComboBoxItem ComboItem = (ComboBoxItem)comboxSearch.SelectedItem;
-            string s = ComboItem.Name;
 
-            foreach (var p in ((MainWindow)Application.Current.MainWindow)._comics)
+            listBoxComics.Items.Clear();
+            listBoxComics.Visibility = Visibility.Visible;
+            foreach (var comics in MainWindow._comics)
+            {
+                if ((textBoxName.Text == comics.Name || textBoxName.Text == "") && (textBoxAuthor.Text == comics.Author || textBoxAuthor.Text == "") && (textBoxYear.Text == comics.Year.ToString() || textBoxYear.Text == "") && (comboBoxPublisher.Text == comics.Publisher.Name || comboBoxPublisher.Text == ""))
                 {
-                
-                    if (s == "Publisher")
-                    {
-                    if (p.Publisher.Name == textBoxSearch.Text.ToString())
-                        _searchComics.Add(p);
-                    } else
-                    if (s == "Name")
-                    {
-                        if (p.Name == textBoxSearch.Text.ToString())
-                        _searchComics.Add(p);
-                } else
-                    if (s == "Year")
-                    {
-                        if (p.Year == Int32.Parse(textBoxSearch.Text))
-                        _searchComics.Add(p);
+                    listBoxComics.Items.Add(comics);
+                   
                 }
-                else
-                    if (s == "Author")
-                    {
-                        if (p.Author == textBoxSearch.Text.ToString())
-                        _searchComics.Add(p);
-                }
-              
             }
-            listBoxComics.ItemsSource = _searchComics;
+
+           MainWindow._comics.Clear();
+            //listBoxComics.ItemsSource = _searchComics;
+        }
+    }
+}
             
              
     
             
-        }
-    }
-}
+        
+    
+

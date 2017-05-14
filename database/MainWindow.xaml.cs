@@ -23,8 +23,8 @@ namespace database
     /// </summary>
     public partial class MainWindow : Window
     {
-        public List<Comics> _comics = new List<Comics>();
-        public List<Publisher> _publishers = new List<Publisher>();
+        public static List<Comics> _comics = new List<Comics>();
+        public static List<Publisher> _publishers = new List<Publisher>();
         const string FileName = "database.txt";
         public MainWindow()
         {

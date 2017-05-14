@@ -7,22 +7,53 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="480.757"
       Title="NewComicsPage">
+    <Page.Resources>
+        <Style x:Key="placeHolder" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <TextBox Text="{Binding Path=Text, 
+RelativeSource={RelativeSource TemplatedParent}, 
+Mode=TwoWay, 
+UpdateSourceTrigger=PropertyChanged}" 
+x:Name="textSource" 
+Background="Transparent" 
+Panel.ZIndex="2" />
+                            <TextBox Text="{TemplateBinding Tag}" Background="{TemplateBinding Background}" Panel.ZIndex="1">
+                                <TextBox.Style>
+                                    <Style TargetType="{x:Type TextBox}">
+                                        <Setter Property="Foreground" Value="Transparent"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=Text, Source={x:Reference textSource}}" Value="">
+                                                <Setter Property="Foreground" Value="LightGray"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
 
     <Grid>
         <Button x:Name="buttonAdd" Content="Добавить" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
                 Width="90" Height="25" Margin="155,0,148.6,23.4" Click="Add"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Издательство" VerticalAlignment="Top"/>
 
-        <TextBlock HorizontalAlignment="Left" Margin="10,34,0,0" TextWrapping="Wrap" Text="Название" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBoxName" HorizontalAlignment="Left" 
+        <TextBox x:Name="textBoxName" Style="{StaticResource placeHolder}" Tag="Name" HorizontalAlignment="Left" 
                  Height="20" Margin="103,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="281"/>
-        <TextBox x:Name="textBoxYear" HorizontalAlignment="Left" 
+        <TextBox x:Name="textBoxYear" Style="{StaticResource placeHolder}" Tag="Year" HorizontalAlignment="Left" 
             Height="20" Margin="103,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="281"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,60,0,0" TextWrapping="Wrap" Text="Год" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBoxAuthor" HorizontalAlignment="Left" 
+
+        <TextBox x:Name="textBoxAuthor" Style="{StaticResource placeHolder}" Tag="Author" HorizontalAlignment="Left" 
             Height="20" Margin="103,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="281"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,85,0,0" TextWrapping="Wrap" Text="Автор" VerticalAlignment="Top" RenderTransformOrigin="0.368,2.748"/>
-        <ComboBox x:Name="comboBoxPublisher" DisplayMemberPath="Name" HorizontalAlignment="Left" Margin="103,7,0,0" VerticalAlignment="Top" Width="281"/>
+
+        <ComboBox x:Name="comboBoxPublisher"  DisplayMemberPath="Name" HorizontalAlignment="Left" Margin="103,7,0,0" VerticalAlignment="Top" Width="281">
+            
+        </ComboBox>
 
 
     </Grid>

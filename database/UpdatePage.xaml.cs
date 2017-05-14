@@ -24,6 +24,7 @@ namespace database
         {
             InitializeComponent();
             comboBoxPublisher.ItemsSource = publishers ;
+            comboBoxPublisher.Text = (comics.Publisher.Name).ToString();
            textBoxName.Text = comics.Name;
             textBoxAuthor.Text = comics.Author;
             textBoxYear.Text = (comics.Year).ToString();
