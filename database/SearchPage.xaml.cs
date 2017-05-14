@@ -50,7 +50,8 @@ namespace database
            
             ComboBoxItem ComboItem = (ComboBoxItem)comboxSearch.SelectedItem;
             string s = ComboItem.Name;
-                foreach (var p in ((MainWindow)Application.Current.MainWindow)._comics)
+
+            foreach (var p in ((MainWindow)Application.Current.MainWindow)._comics)
                 {
                 
                     if (s == "Publisher")
@@ -75,7 +76,8 @@ namespace database
                         _searchComics.Add(p);
                 }
               
-            } listBoxComics.ItemsSource = _searchComics;
+            }
+            listBoxComics.ItemsSource = _searchComics;
             
              
     

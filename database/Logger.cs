@@ -29,7 +29,7 @@ namespace database
 
         public void Log(string msg)
         {
-            File.AppendAllText("log.txt", $"{DateTime.Now} - {msg}");
+            File.AppendAllText("log.txt", $"{DateTime.Now} - {msg}" + "\t");
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -28,10 +29,39 @@ namespace database
         public MainWindow()
         {
             InitializeComponent();
+            FileSystemWatcher watcher = new FileSystemWatcher();
+
+            int index = Assembly.GetExecutingAssembly().Location.LastIndexOf("\\");
+            string _path = Assembly.GetExecutingAssembly().Location.Substring(0, index);
+            watcher.Path = _path;
+            watcher.EnableRaisingEvents = true;
+            watcher.Created += new FileSystemEventHandler(watcher_Created);
+            watcher.Deleted += new FileSystemEventHandler(watcher_Deleted);
+            watcher.Changed += new FileSystemEventHandler(watcher_Changed);
+            watcher.Renamed += new RenamedEventHandler(watcher_Renamed);
+
             FrameMain.Navigate(new LoginPage());
         }
 
-       
+        static void watcher_Renamed(object sender, RenamedEventArgs e)
+        {
+            File.AppendAllText(Environment.CurrentDirectory+ "\\watcher"+"\\watcher.txt", e.OldName + " has been renamed" +"\t");
+        }
+        static void watcher_Changed(object sender, FileSystemEventArgs e)
+        {
+            File.AppendAllText(Environment.CurrentDirectory + "\\watcher" + "\\watcher.txt", e.Name + " has been changed" + "\t");
+        }
+        static void watcher_Deleted(object sender, FileSystemEventArgs e)
+        {
+            File.AppendAllText(Environment.CurrentDirectory + "\\watcher" + "\\watcher.txt", e.Name + " has been deleted" + "\t");
+        }
+        static void watcher_Created(object sender, FileSystemEventArgs e)
+        {
+            File.AppendAllText(Environment.CurrentDirectory + "\\watcher" + "\\watcher.txt", e.Name + " has been created" + "\t");
+        }
+
+
+
     }
 }
 
