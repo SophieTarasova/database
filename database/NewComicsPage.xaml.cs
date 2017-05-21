@@ -40,29 +40,29 @@ namespace database
             int year;
             if (string.IsNullOrWhiteSpace(textBoxName.Text))
             {
-                MessageBox.Show("Необходимо ввести название");
+                MessageBox.Show("You have to  enter the name");
                 textBoxName.Focus();
-                Logger.Instance.Log("Ошибка добавления комикса");
+                Logger.Instance.Log("Error occured while adding the new comics");
                 return;
             }
             if (string.IsNullOrWhiteSpace(textBoxAuthor.Text))
             {
-                MessageBox.Show("Необходимо ввести имя автора");
-                Logger.Instance.Log("Ошибка добавления комикса");
+                MessageBox.Show("You have to  enter the author");
+                Logger.Instance.Log("Error occured while adding the new comics");
                 textBoxAuthor.Focus();
                 return;
             }
             if (!int.TryParse(textBoxYear.Text, out year))
             {
-                MessageBox.Show("Необходимо ввести год");
-                Logger.Instance.Log("Ошибка добавления комикса");
+                MessageBox.Show("You have to  enter the year");
+                Logger.Instance.Log("Error occured while adding the new comics");
                 textBoxYear.Focus();
                 return;
             }
             if (comboBoxPublisher.SelectedItem == null)
             {
-                MessageBox.Show("Необходимо выбрать издательство");
-                Logger.Instance.Log("Ошибка добавления комикса");
+                MessageBox.Show("You have to  select the publisher");
+                Logger.Instance.Log("Error occured while adding the new comics");
                 comboBoxPublisher.Focus();
                 return;
             }
@@ -70,9 +70,15 @@ namespace database
 
             _newComics = new Comics(textBoxName.Text, textBoxAuthor.Text, year);
             _newComics.Publisher = comboBoxPublisher.SelectedItem as Publisher;
-            Logger.Instance.Log("Добавлен новый комикс");
+            Logger.Instance.Log("New comics added");
             MainPage p = new MainPage(NewComics);
             NavigationService.Navigate(p);
+        }
+
+        private void comboBoxPublisher_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (comboBoxPublisher.SelectedIndex !=-1)
+                textBlock.Visibility = Visibility.Hidden;
         }
     }
 }

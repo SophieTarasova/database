@@ -33,6 +33,8 @@ namespace database
 
         private void buttonBack_Click(object sender, RoutedEventArgs e)
         {
+            MainWindow._comics.Clear();
+            buttonSearch.IsEnabled = true;
             MainPage p = new MainPage();
             NavigationService.Navigate(p);
         }
@@ -52,7 +54,16 @@ namespace database
             }
 
            MainWindow._comics.Clear();
+            buttonSearch.IsEnabled = false;
             //listBoxComics.ItemsSource = _searchComics;
+        }
+
+    
+        private void comboBoxPublisher_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+
+            if (comboBoxPublisher.SelectedIndex != -1)
+                textBlock.Visibility = Visibility.Hidden;
         }
     }
 }

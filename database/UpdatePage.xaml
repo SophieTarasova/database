@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:database"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="400" d:DesignWidth="800"
       Title="UpdatePage">
     <Page.Resources>
         <Style x:Key="placeHolder" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
@@ -38,19 +38,24 @@ Panel.ZIndex="2" />
             </Setter>
         </Style>
     </Page.Resources>
+    <Page.Background>
+
+        <ImageBrush ImageSource="Images\main.png" Stretch="UniformToFill" />
+
+    </Page.Background>
 
     <Grid Margin="0,0,-117,144">
-        <TextBox x:Name="textBoxName" Style="{StaticResource placeHolder}" Tag="Name" HorizontalAlignment="Left" 
-                 Height="20" Margin="103,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="281"/>
-        <TextBox x:Name="textBoxYear" Style="{StaticResource placeHolder}" Tag="Year" HorizontalAlignment="Left" 
-            Height="20" Margin="103,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="281"/>
 
-        <TextBox x:Name="textBoxAuthor" Style="{StaticResource placeHolder}" Tag="Author" HorizontalAlignment="Left" 
-            Height="20" Margin="103,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="281"/>
+        <TextBox x:Name="textBoxName" Style="{StaticResource placeHolder}" Tag="Name" FontSize="20" HorizontalAlignment="Left" 
+                 Height="34" Margin="230,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="332"/>
+        <TextBox x:Name="textBoxYear" Style="{StaticResource placeHolder}" Tag="Year"  HorizontalAlignment="Left" 
+            Height="32" Margin="230,103,0,0" TextWrapping="Wrap" FontSize="20" VerticalAlignment="Top" Width="332"/>
 
-        <ComboBox x:Name="comboBoxPublisher"  DisplayMemberPath="Name" HorizontalAlignment="Left" Margin="103,7,0,0" VerticalAlignment="Top" Width="281"/>
+        <TextBox x:Name="textBoxAuthor" Style="{StaticResource placeHolder}" Tag="Author" FontSize="20" HorizontalAlignment="Left" 
+            Height="31" Margin="230,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="332"/>
 
-        <Button x:Name="buttonUpdate" Content="Update" HorizontalAlignment="Left" Margin="174,127,0,0" VerticalAlignment="Top" Width="75" Click="buttonUpdate_Click"/>
+        <ComboBox x:Name="comboBoxPublisher"  DisplayMemberPath="Name" FontSize="20" HorizontalAlignment="Left" Margin="230,25,0,0" VerticalAlignment="Top" Width="332" Height="34"/>
+        <Button x:Name="buttonUpdate" Content="Update" HorizontalAlignment="Left" Margin="624,75,0,0" VerticalAlignment="Top" Width="103" Click="buttonUpdate_Click_1" Height="37" FontFamily="AR DESTINE" FontSize="24" Cursor="Hand"/>
 
     </Grid>
 </Page>

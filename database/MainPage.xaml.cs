@@ -77,7 +77,7 @@ namespace database
             if (listBoxComics.SelectedIndex != -1)
             {
                MainWindow._comics.RemoveAt(listBoxComics.SelectedIndex);
-                Logger.Instance.Log("Было произведено удаление комикса");
+                Logger.Instance.Log("The comics was deleted");
                 Serialization();
            //     SaveData();
                 RefreshListBox();
@@ -200,13 +200,14 @@ namespace database
 
         private void buttonUpdate_Click(object sender, RoutedEventArgs e)
         {
-            UpdatePage p = new UpdatePage(listBoxComics.SelectedItem as Comics, MainWindow._publishers, listBoxComics.SelectedIndex);
+            
             if (listBoxComics.SelectedIndex !=-1)
             {
+                UpdatePage p = new UpdatePage(listBoxComics.SelectedItem as Comics, MainWindow._publishers, listBoxComics.SelectedIndex);
                 NavigationService.Navigate(p); 
 
             }
-            else MessageBox.Show("Вы не выбрали комикс для редактирования");
+            else MessageBox.Show("You haven't chosen the comics to update");
 
 
 
@@ -215,9 +216,19 @@ namespace database
         private void buttonExit_Click(object sender, RoutedEventArgs e)
         {
             MainWindow._comics.Clear();
-            Logger.Instance.Log("Был произведен выход на страницу авторизации");
+            Logger.Instance.Log("Transition to login page");
             LoginPage p = new LoginPage();
             NavigationService.Navigate(p);
+        }
+
+        private void buttonExit_MouseEnter(object sender, MouseEventArgs e)
+        {
+            buttonExit.FontSize = 30;
+        }
+
+        private void buttonExit_MouseLeave(object sender, MouseEventArgs e)
+        {
+            buttonExit.FontSize = 25;
         }
     }
 }

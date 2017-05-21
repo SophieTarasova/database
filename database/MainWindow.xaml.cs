@@ -45,19 +45,20 @@ namespace database
 
         static void watcher_Renamed(object sender, RenamedEventArgs e)
         {
-            File.AppendAllText(Environment.CurrentDirectory+ "\\watcher"+"\\watcher.txt", e.OldName + " has been renamed" +"\t");
+            File.AppendAllText(Environment.CurrentDirectory+ "\\watcher"+"\\watcher.txt", $"{ DateTime.Now}  " +
+            e.OldName + " has been renamed" + Environment.NewLine);
         }
         static void watcher_Changed(object sender, FileSystemEventArgs e)
         {
-            File.AppendAllText(Environment.CurrentDirectory + "\\watcher" + "\\watcher.txt", e.Name + " has been changed" + "\t");
+            File.AppendAllText(Environment.CurrentDirectory + "\\watcher" + "\\watcher.txt", $"{ DateTime.Now}  "+ e.Name + " has been changed" + Environment.NewLine);
         }
         static void watcher_Deleted(object sender, FileSystemEventArgs e)
         {
-            File.AppendAllText(Environment.CurrentDirectory + "\\watcher" + "\\watcher.txt", e.Name + " has been deleted" + "\t");
+            File.AppendAllText(Environment.CurrentDirectory + "\\watcher" + "\\watcher.txt", $"{ DateTime.Now}  " + e.Name + " has been deleted" + Environment.NewLine);
         }
         static void watcher_Created(object sender, FileSystemEventArgs e)
         {
-            File.AppendAllText(Environment.CurrentDirectory + "\\watcher" + "\\watcher.txt", e.Name + " has been created" + "\t");
+            File.AppendAllText(Environment.CurrentDirectory + "\\watcher" + "\\watcher.txt", $"{ DateTime.Now}  " +e.Name + " has been created" + Environment.NewLine);
         }
 
 

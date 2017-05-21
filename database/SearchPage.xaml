@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:database"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="402.208"
+      d:DesignHeight="400" d:DesignWidth="800"
       Title="SearchPage">
     <Page.Resources>
         <Style x:Key="placeHolder" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
@@ -20,7 +20,7 @@ UpdateSourceTrigger=PropertyChanged}"
 x:Name="textSource" 
 Background="Transparent" 
 Panel.ZIndex="2" />
-                            <TextBox Text="{TemplateBinding Tag}" Background="{TemplateBinding Background}" Panel.ZIndex="1">
+                            <TextBox Text="{TemplateBinding Tag}" FontSize="16" Background="{TemplateBinding Background}" Panel.ZIndex="1">
                                 <TextBox.Style>
                                     <Style TargetType="{x:Type TextBox}">
                                         <Setter Property="Foreground" Value="Transparent"/>
@@ -38,20 +38,44 @@ Panel.ZIndex="2" />
             </Setter>
         </Style>
     </Page.Resources>
+    <Page.Background>
 
+        <ImageBrush ImageSource="Images\main.png" Stretch="UniformToFill" />
+
+    </Page.Background>
     <Grid Margin="0,0,-142,0">
-        <Button x:Name="buttonSearch" Content="Поиск" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
-                Width="90" Height="25" Margin="136,0,318.4,38" Click="buttonSearch_Click"/>
-        <TextBox x:Name="textBoxName" Style="{StaticResource placeHolder}" Tag="Name" HorizontalAlignment="Left" 
-                 Height="20" Margin="103,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="281"/>
-        <TextBox x:Name="textBoxYear" Style="{StaticResource placeHolder}" Tag="Year" HorizontalAlignment="Left" 
-            Height="20" Margin="103,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="281"/>
-        <TextBox x:Name="textBoxAuthor" Style="{StaticResource placeHolder}" Tag="Author" HorizontalAlignment="Left" 
-            Height="20" Margin="103,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="281"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,85,0,0" TextWrapping="Wrap" Text="Автор" VerticalAlignment="Top" RenderTransformOrigin="0.368,2.748"/>
-        <ComboBox x:Name="comboBoxPublisher" DisplayMemberPath="Name" HorizontalAlignment="Left" Margin="103,7,0,0" VerticalAlignment="Top" Width="281"/>
-        <ListBox x:Name="listBoxComics" DisplayMemberPath="Info" HorizontalAlignment="Left" Height="111" Margin="79,121,0,0" VerticalAlignment="Top" Width="341"/>
-        <Button x:Name="buttonBack" Content="Back" HorizontalAlignment="Left" Margin="276,270,0,0" VerticalAlignment="Top" Width="75" Click="buttonBack_Click"/>
+
+        <Button x:Name="buttonSearch" Content="Search" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+                Width="96" Height="29" Margin="107,0,739,125" Click="buttonSearch_Click" FontFamily="AR DESTINE" FontSize="24" Cursor="Hand"/>
+        <TextBox x:Name="textBoxName" Style="{StaticResource placeHolder}" FontSize="16" Tag="Name" HorizontalAlignment="Left" 
+                 Height="27" Margin="10,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top"  Width="293"/>
+        <TextBox x:Name="textBoxYear" Style="{StaticResource placeHolder}" Tag="Year" FontSize="16" HorizontalAlignment="Left" 
+            Height="24" Margin="10,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="293"/>
+        <TextBox x:Name="textBoxAuthor" Style="{StaticResource placeHolder}" Tag="Author" FontSize="16" HorizontalAlignment="Left" 
+            Height="26" Margin="10,139,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="293"/>
+        <ComboBox x:Name="comboBoxPublisher" DisplayMemberPath="Name" HorizontalAlignment="Left" Margin="10,44,0,0" VerticalAlignment="Top" Width="293" Height="29" SelectionChanged="comboBoxPublisher_SelectionChanged_1"/>
+        <ListBox x:Name="listBoxComics"  HorizontalContentAlignment="Stretch" HorizontalAlignment="Left" Height="225" Margin="340,44,0,0" VerticalAlignment="Top" Width="416">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="110"/>
+                            <ColumnDefinition Width="70"/>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="70"/>
+                            <ColumnDefinition Width="110"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{Binding Name}"></TextBlock>
+                        <TextBlock Grid.Column="1" Text="{Binding Author}"></TextBlock>
+                        <TextBlock Grid.Column="2" Text="{Binding Year}"></TextBlock>
+                        <TextBlock Grid.Column="3" Text="{Binding Publisher.Name}"></TextBlock>
+                        <TextBlock Grid.Column="4" Text="{Binding Publisher.Site}"></TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button x:Name="buttonBack" Content="Back" HorizontalAlignment="Left" Margin="518,286,0,0" VerticalAlignment="Top" Width="76" Click="buttonBack_Click" FontFamily="AR DESTINE" FontSize="24" Height="30" Cursor="Hand"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,44,0,0" TextWrapping="Wrap" Text="Publisher" FontSize="15" Foreground="DarkGray" VerticalAlignment="Top" Height="29" Width="83"/>
 
     </Grid>
 </Page>

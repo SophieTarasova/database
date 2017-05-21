@@ -41,42 +41,41 @@ namespace database
           int index;
 
 
-        private void buttonUpdate_Click(object sender, RoutedEventArgs e)
+        private void buttonUpdate_Click_1(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(textBoxName.Text))
             {
-                MessageBox.Show("Необходимо ввести название");
-                Logger.Instance.Log("Ошибка редактирования комикса");
+                MessageBox.Show("You have to enter the name");
+                Logger.Instance.Log("Error occured while updating the comics");
                 textBoxName.Focus();
                 return;
             }
             if (string.IsNullOrWhiteSpace(textBoxAuthor.Text))
             {
-                MessageBox.Show("Необходимо ввести имя автора");
-                Logger.Instance.Log("Ошибка редактирования комикса");
+                MessageBox.Show("You have to enter the author");
+                Logger.Instance.Log("Error occured while updating the  comics");
                 textBoxAuthor.Focus();
                 return;
             }
             if (string.IsNullOrWhiteSpace((textBoxYear.Text).ToString()))
             {
-                MessageBox.Show("Необходимо ввести год");
-                Logger.Instance.Log("Ошибка редактирования комикса");
+                MessageBox.Show("You have to  enter the year");
+                Logger.Instance.Log("Error occured while updating the  comics");
                 textBoxYear.Focus();
                 return;
             }
             if (comboBoxPublisher.SelectedItem == null)
             {
-                MessageBox.Show("Необходимо выбрать издательство");
-                Logger.Instance.Log("Ошибка редактирования комикса");
+                MessageBox.Show("You have to  select the publisher");
+                Logger.Instance.Log("Error occured while updating the comics");
                 comboBoxPublisher.Focus();
                 return;
             }
             _newComics = new Comics(textBoxName.Text, textBoxAuthor.Text, int.Parse(textBoxYear.Text));
             _newComics.Publisher = comboBoxPublisher.SelectedItem as Publisher;
-            Logger.Instance.Log("Было произведено редактирования комикса");
+            Logger.Instance.Log("The comics was updated");
             MainPage p = new MainPage(NewComics, index);
             NavigationService.Navigate(p);
-
         }
     }
 }

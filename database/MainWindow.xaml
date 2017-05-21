@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:database"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Comics DataBase" Height="390" Width="800" ResizeMode="NoResize" Icon="Images\icon.ico">
     <Grid>
         <Frame Name="FrameMain" NavigationUIVisibility="Hidden">
             

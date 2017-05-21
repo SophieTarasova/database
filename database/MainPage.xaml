@@ -4,17 +4,42 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:database"
-      mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-      Title="MainPage">
+      mc:Ignorable="d"
+      
+      Title="MainPage"  Height="400" Width="800">
+    <Page.Background>
 
-    <Grid Margin="0,0,-165,10">
-        <ListBox x:Name="listBoxComics" DisplayMemberPath="Info" HorizontalAlignment="Left" Height="189" Margin="84,22,0,0" VerticalAlignment="Top" Width="280"/>
-        <Button x:Name="buttonAdd" Content="Add" HorizontalAlignment="Left" Margin="20,264,0,0" VerticalAlignment="Top" Width="75" Click="buttonAdd_Click"/>
-        <Button x:Name="buttonDelete" Content="Delete" HorizontalAlignment="Left" Height="19" Margin="120,264,0,0" VerticalAlignment="Top" Width="70" Click="buttonDelete_Click"/>
-        <Button x:Name="buttonSearch" Content="Search" HorizontalAlignment="Left" Margin="211,264,0,0" VerticalAlignment="Top" Width="75" Click="buttonSearch_Click"/>
-        <Button x:Name="buttonUpdate" Content="Update" HorizontalAlignment="Left" Margin="316,264,0,0" VerticalAlignment="Top" Width="75" Click="buttonUpdate_Click"/>
-        <Button x:Name="buttonExit" Content="Exit" HorizontalAlignment="Left" Margin="390,10,0,0" VerticalAlignment="Top" Width="75" Click="buttonExit_Click"/>
+        <ImageBrush ImageSource="Images\main.png" Stretch="UniformToFill" />
 
+    </Page.Background>
+    <Grid>
+
+        <ListBox x:Name="listBoxComics"   HorizontalContentAlignment="Stretch" HorizontalAlignment="Left" Height="174" Margin="120,47,0,0" VerticalAlignment="Top" Width="548">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="190"/>
+                            <ColumnDefinition Width="95"/>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="85"/>
+                            <ColumnDefinition Width="155"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{Binding Name}"></TextBlock>
+                        <TextBlock Grid.Column="1" Text="{Binding Author}"></TextBlock>
+                        <TextBlock Grid.Column="2" Text="{Binding Year}"></TextBlock>
+                        <TextBlock Grid.Column="3" Text="{Binding Publisher.Name}"></TextBlock>
+                        <TextBlock Grid.Column="4" Text="{Binding Publisher.Site}"></TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button x:Name="buttonAdd" Content="Add" FontFamily="AR DESTINE" FontSize="25" HorizontalAlignment="Left" Margin="120,238,0,0" VerticalAlignment="Top" Width="89" Click="buttonAdd_Click" Height="27" Cursor="Hand"/>
+        <Button x:Name="buttonDelete" Content="Delete" HorizontalAlignment="Left" FontSize="25" FontFamily="AR DESTINE" Height="27" Margin="268,238,0,0" VerticalAlignment="Top" Width="98" Click="buttonDelete_Click" Cursor="Hand"/>
+        <Button x:Name="buttonSearch" Content="Search" HorizontalAlignment="Left" FontSize="25" FontFamily="AR DESTINE" Margin="411,238,0,0" VerticalAlignment="Top" Width="93" Click="buttonSearch_Click" Height="27" Cursor="Hand"/>
+        <Button x:Name="buttonUpdate" Content="Update" HorizontalAlignment="Left" FontSize="25" FontFamily="AR DESTINE" Margin="570,238,0,0" VerticalAlignment="Top" Width="98" Click="buttonUpdate_Click" Height="27" Cursor="Hand"/>
+        <Button x:Name="buttonExit" Content="Exit" FontFamily="AR DESTINE" HorizontalAlignment="Left" FontSize="25" BorderThickness="0"  
+    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Foreground="WhiteSmoke" Margin="689,10,0,0" VerticalAlignment="Top" Width="88" Click="buttonExit_Click" Height="31" Cursor="Hand" MouseEnter="buttonExit_MouseEnter" MouseLeave="buttonExit_MouseLeave"/>
     </Grid>
+
 </Page>
