@@ -27,7 +27,7 @@ Panel.ZIndex="2" />
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding Path=Text, Source={x:Reference textSource}}" Value="">
                                                 <Setter Property="Foreground" Value="LightGray" />
-                                             
+
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -46,19 +46,24 @@ Panel.ZIndex="2" />
     </Page.Background>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="0*"/>
+            <RowDefinition Height="19*"/>
+        </Grid.RowDefinitions>
 
-        <Button x:Name="buttonAdd" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
-                Width="105" Height="30" Margin="350,0,345,42" Click="Add" FontFamily="AR DESTINE" FontSize="25" Cursor="Hand"/>
+        <Button x:Name="buttonAdd" Content="Add Comics" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
+                Width="151" Height="30" Margin="112,0,0,79" Click="Add" FontFamily="AR DESTINE" FontSize="25" Cursor="Hand" Grid.Row="2"/>
 
         <TextBox x:Name="textBoxName" Style="{StaticResource placeHolder}" Tag="Name" FontSize="20" HorizontalAlignment="Left" 
-                 Height="34" Margin="230,124,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="332"/>
+                 Height="34" Margin="32,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="332" Grid.Row="2"/>
         <TextBox x:Name="textBoxYear" Style="{StaticResource placeHolder}" Tag="Year"  HorizontalAlignment="Left" 
-            Height="32" Margin="230,163,0,0" TextWrapping="Wrap" FontSize="20" VerticalAlignment="Top" Width="332"/>
+            Height="32" Margin="32,83,0,0" TextWrapping="Wrap" FontSize="20" VerticalAlignment="Top" Width="332" Grid.Row="2"/>
 
         <TextBox x:Name="textBoxAuthor" Style="{StaticResource placeHolder}" Tag="Author" FontSize="20" HorizontalAlignment="Left" 
-            Height="31" Margin="230,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="332"/>
+            Height="31" Margin="32,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="332" Grid.Row="2"/>
 
-        <ComboBox x:Name="comboBoxPublisher"  DisplayMemberPath="Name" FontSize="20" HorizontalAlignment="Left" Margin="230,83,0,0" VerticalAlignment="Top" Width="332" SelectionChanged="comboBoxPublisher_SelectionChanged" Height="33">
+        <ComboBox x:Name="comboBoxPublisher"  DisplayMemberPath="Name" FontSize="20" Margin="32,83,420,0" VerticalAlignment="Top" SelectionChanged="comboBoxPublisher_SelectionChanged" Height="33" Grid.RowSpan="3">
 
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
@@ -67,7 +72,10 @@ Panel.ZIndex="2" />
                 </LinearGradientBrush>
             </ComboBox.Background>
         </ComboBox>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Foreground="DarkGray" FontSize="20" Margin="230,83,0,0" TextWrapping="Wrap" Text="Publisher" IsHitTestVisible="False" VerticalAlignment="Top" Height="33" Width="119"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Foreground="DarkGray" FontSize="20" Margin="32,84,0,0" TextWrapping="Wrap" Text="Publisher" IsHitTestVisible="False" VerticalAlignment="Top" Height="33" Width="119" Grid.RowSpan="3"/>
+        <TextBox x:Name="textBoxPublisherName" Style="{StaticResource placeHolder}" Tag="Name" FontSize="20" HorizontalAlignment="Left" Height="33" Margin="476,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="265" Grid.RowSpan="3"/>
+        <TextBox x:Name="textBoxPublisherSite" HorizontalAlignment="Left" Style="{StaticResource placeHolder}" FontSize="20" Tag="Site" Height="34" Margin="476,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="265" Grid.Row="2"/>
+        <Button x:Name="buttonAddPublisher" Content=" Add Publisher" VerticalAlignment="Bottom" Height="30" Margin="497,0,94,79" FontFamily="AR DESTINE" FontSize="25" Cursor="Hand" Click="buttonAddPublisher_Click" Grid.Row="2"/>
 
 
     </Grid>

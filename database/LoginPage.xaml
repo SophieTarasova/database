@@ -45,7 +45,7 @@ Panel.ZIndex="2" />
         <Button x:Name="buttonLogin"  BorderThickness="0"  
     Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Content="log in" HorizontalAlignment="Left" Foreground="LightGray" Background="Transparent" FontSize="20" Margin="354,205,0,0" VerticalAlignment="Top" Width="103" Click="buttonLogin_Click" Height="46" FontFamily="AR DESTINE" Cursor="Hand" MouseEnter="buttonLogin_MouseEnter" MouseLeave="buttonLogin_MouseLeave"/>
         <Button x:Name="buttonNonAuthorized" BorderThickness="0"  
-    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" FontFamily="AR DESTINE" FontSize="15" Content="non-authorized" Foreground="LightGray" Background="Transparent"  HorizontalAlignment="Left" Margin="615,302,0,0" VerticalAlignment="Top" Width="185" Click="buttonNonAuthorized_Click" Height="49" Cursor="Hand" MouseEnter="buttonNonAuthorized_MouseEnter" MouseLeave="buttonNonAuthorized_MouseLeave">
+    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" ToolTip="By proceeding you agree that everything'll be in read-only mode" FontFamily="AR DESTINE" FontSize="15" Content="non-authorized" Foreground="LightGray" Background="Transparent"  HorizontalAlignment="Left" Margin="615,302,0,0" VerticalAlignment="Top" Width="185" Click="buttonNonAuthorized_Click" Height="49" Cursor="Hand" MouseEnter="buttonNonAuthorized_MouseEnter" MouseLeave="buttonNonAuthorized_MouseLeave">
 
         </Button>
         <TextBlock x:Name="textBlockPassword" FontFamily="AR DESTINE" FontSize="25"  Foreground="LightGray" TextAlignment="Center" HorizontalAlignment="Left" Margin="259,167,0,0" TextWrapping="Wrap" Text="password" VerticalAlignment="Top" />

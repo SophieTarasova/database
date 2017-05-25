@@ -26,7 +26,14 @@ namespace database
             comboBoxPublisher.ItemsSource = publishers;
             
         }
-
+        Publisher _newPublisher;
+        public Publisher NewPublisher
+        {
+            get
+            {
+                return _newPublisher;
+            }
+        }
         Comics _newComics;
         public Comics NewComics
         {
@@ -79,6 +86,28 @@ namespace database
         {
             if (comboBoxPublisher.SelectedIndex !=-1)
                 textBlock.Visibility = Visibility.Hidden;
+        }
+
+        private void buttonAddPublisher_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBoxPublisherName.Text))
+            {
+                MessageBox.Show("You have to  enter the name");
+                textBoxName.Focus();
+                Logger.Instance.Log("Error occured while adding the new comics");
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(textBoxPublisherSite.Text))
+            {
+                MessageBox.Show("You have to  enter the author");
+                Logger.Instance.Log("Error occured while adding the new comics");
+                textBoxAuthor.Focus();
+                return;
+            }
+            _newPublisher = new Publisher(textBoxPublisherName.Text, textBoxPublisherSite.Text);
+            Logger.Instance.Log("New publisher added");
+            MainPage p = new MainPage(NewPublisher);
+            NavigationService.Navigate(p);
         }
     }
 }

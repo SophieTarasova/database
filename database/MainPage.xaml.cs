@@ -60,6 +60,14 @@ namespace database
             Serialization();
             RefreshListBox();
         }
+        public MainPage(Publisher NewPublisher)
+        {
+            InitializeComponent();
+            MainWindow._publishers.Add(NewPublisher);
+            //   SaveData();
+            Serialization();
+            RefreshListBox();
+        }
         private void RefreshListBox()
         {
             listBoxComics.ItemsSource = null;
