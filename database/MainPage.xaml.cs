@@ -87,7 +87,7 @@ namespace database
                MainWindow._comics.RemoveAt(listBoxComics.SelectedIndex);
                 Logger.Instance.Log("The comics was deleted");
                 Serialization();
-           //     SaveData();
+           //   SaveData();
                 RefreshListBox();
             }
         }
