@@ -29,6 +29,8 @@ namespace database
         public MainWindow()
         {
             InitializeComponent();
+            string path = Environment.CurrentDirectory + "\\watcher";
+            Directory.CreateDirectory(path);
             FileSystemWatcher watcher = new FileSystemWatcher();
 
             int index = Assembly.GetExecutingAssembly().Location.LastIndexOf("\\");
